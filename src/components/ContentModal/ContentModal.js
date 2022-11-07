@@ -4,9 +4,8 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { ThemeContext } from "@emotion/react";
 import axios from "axios";
+import Gallery from "../Carousel/Carousel";
 import "./ContentModal.css";
 import {
   img_500,
@@ -26,7 +25,7 @@ const style = {
   border: "1px solid #282c34",
   boxShadow: 24,
   p: 4,
-  borderRadius: 10,
+  borderRadius: "10px",
   color: "white",
 };
 
@@ -47,7 +46,8 @@ export default function ContentModal({ children, media_type, id }) {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
     );
-    setVideo(data.results[0]?.key);
+    // console.log(data.results);
+    setVideo(data.results[1]?.key);
   };
 
   React.useEffect(() => {
@@ -80,7 +80,8 @@ export default function ContentModal({ children, media_type, id }) {
                     content.poster_path
                       ? `${img_500}/${content.poster_path}`
                       : unavailable
-                  }></img>
+                  }
+                />
                 <img
                   alt={content.name || content.title}
                   className='ContentModal__landscape'
@@ -88,7 +89,8 @@ export default function ContentModal({ children, media_type, id }) {
                     content.backdrop_path
                       ? `${img_500}/${content.backdrop_path}`
                       : unavailableLandscape
-                  }></img>
+                  }
+                />
                 <div className='ContentModal__about'>
                   <span className='ContentModal__title'>
                     {content.name || content.title} (
@@ -107,9 +109,9 @@ export default function ContentModal({ children, media_type, id }) {
                     {content.overview}
                   </span>
 
-                  {/* <div>
-                    <Carousel id={id} media_type={media_type} />
-                  </div> */}
+                  <div>
+                    <Gallery id={id} media_type={media_type} />
+                  </div>
 
                   <Button
                     variant='contained'
