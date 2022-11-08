@@ -26,6 +26,8 @@ const Movies = () => {
   }, [page, genreforURL]);
   return (
     <div>
+      <span className='pageTitle'>Movies</span>
+
       <Genres
         type='movie'
         selectedGenres={selectedGenres}
@@ -34,7 +36,6 @@ const Movies = () => {
         setSelectedGenres={setSelectedGenres}
         setPage={setPage}
       />
-      <span className='pageTitle'>Movies</span>
       <div className='trending'>
         {content &&
           content.map((c) => (
