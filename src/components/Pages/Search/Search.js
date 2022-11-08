@@ -49,9 +49,9 @@ const Search = () => {
   return (
     <div>
       <ThemeProvider theme={darkTheme}>
-        <div style={{ display: "flex", margin: "15px 0" }}>
+        <div style={{ display: "flex" }}>
           <TextField
-            stype={{ flex: 1, width: "100vw" }}
+            stype={{ flex: 1 }}
             className='searchBox'
             label='Search'
             variant='filled'
@@ -61,7 +61,7 @@ const Search = () => {
             onClick={fetchSearch}
             variant='contined'
             style={{ marginLeft: 10 }}>
-            <SearchIcon />
+            <SearchIcon fontSize='large' />
           </Button>
         </div>
         <Tabs
@@ -72,7 +72,11 @@ const Search = () => {
             setType(newValue);
             setPage(1);
           }}
-          style={{ paddingBottom: 5 }}>
+          style={{
+            paddingBottom: 5,
+            display: "flex",
+            justifyContent: "center",
+          }}>
           <Tab style={{ width: "50%" }} label='Search Movies'></Tab>
           <Tab style={{ width: "50%" }} label='Search TV Series'></Tab>
         </Tabs>
