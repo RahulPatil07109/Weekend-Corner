@@ -5,7 +5,7 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import axios from "axios";
-import Gallery from "../Carousel/Carousel";
+import Carousel from "../Carousel/Carousel";
 import "./ContentModal.css";
 import {
   img_500,
@@ -37,6 +37,8 @@ export default function ContentModal({ children, media_type, id }) {
   const [video, setVideo] = React.useState();
 
   const fetchData = async () => {
+    // console.log("%", media_type);
+
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/${media_type}/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
     );
@@ -47,7 +49,7 @@ export default function ContentModal({ children, media_type, id }) {
       `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
     );
     // console.log(data.results);
-    setVideo(data.results[1]?.key);
+    setVideo(data.results[0]?.key);
   };
 
   React.useEffect(() => {
@@ -110,11 +112,12 @@ export default function ContentModal({ children, media_type, id }) {
                   </span>
 
                   <div>
-                    <Gallery id={id} media_type={media_type} />
+                    <Carousel id={id} media_type={media_type} />
                   </div>
 
                   <Button
                     variant='contained'
+                    style={{ backgroundColor: "#f50057" }}
                     startIcon={<YouTube />}
                     color='secondary'
                     target='__blank'
